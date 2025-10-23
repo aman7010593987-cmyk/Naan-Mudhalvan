@@ -1,55 +1,51 @@
-// script.js
+function generateResume() {
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const education = document.getElementById("education").value.trim();
+  const skills = document.getElementById("skills").value.trim();
+  const experience = document.getElementById("experience").value.trim();
 
-const carNumberInput = document.getElementById('carNumber');
-const loadCarBtn = document.getElementById('loadCarBtn');
-const controlSection = document.getElementById('controlSection');
-const speedDisplay = document.getElementById('speedDisplay');
-const decreaseBtn = document.getElementById('decreaseBtn');
-const increaseBtn = document.getElementById('increaseBtn');
-const logDiv = document.getElementById('log');
-
-let currentSpeed = 0;
-let loadedCar = '';
-
-loadCarBtn.addEventListener('click', () => {
-  const carNumber = carNumberInput.value.trim().toUpperCase();
-
-  if (!/^[A-Z]{2}\d{2}[A-Z]{2}\d{4}$/.test(carNumber)) {
-    alert('Please enter a valid car number (e.g., KA01AB1234).');
+  if (!name || !email || !phone) {
+    alert("Please fill all required fields (Name, Email, Phone).");
     return;
   }
 
-  loadedCar = carNumber;
-  currentSpeed = 0;
-  updateSpeedDisplay();
-  controlSection.classList.remove('hidden');
-  logDiv.innerHTML = ''; // Clear previous logs
-  logAction(`Car ${loadedCar} loaded. Speed initialized to 0 km/h.`);
-});
+  const resumeHTML = `
+    <div class="resume-header">
+      <h3>${name}</h3>
+      <p>${email} | ${phone}</p>
+    </div>
+    <hr>
+    <h4>🎓 Education</h4>
+    <p>${education || "Not provided"}</p>
+    <h4>💡 Skills</h4>
+    <p>${skills || "Not provided"}</p>
+    <h4>💼 Experience</h4>
+    <p>${experience || "Not provided"}</p>
+  `;
 
-increaseBtn.addEventListener('click', () => {
-  currentSpeed += 10;
-  updateSpeedDisplay();
-  logAction(`Increased speed to ${currentSpeed} km/h.`);
-});
-
-decreaseBtn.addEventListener('click', () => {
-  if (currentSpeed >= 10) {
-    currentSpeed -= 10;
-  } else {
-    currentSpeed = 0;
-  }
-  updateSpeedDisplay();
-  logAction(`Decreased speed to ${currentSpeed} km/h.`);
-});
-
-function updateSpeedDisplay() {
-  speedDisplay.textContent = `Speed: ${currentSpeed} km/h`;
+  document.getElementById("resumeDisplay").innerHTML = resumeHTML;
+  document.getElementById("resumeSection").style.display = "block";
+  window.scrollTo(0, document.body.scrollHeight);
 }
 
-function logAction(message) {
-  const timestamp = new Date().toLocaleTimeString();
-  const entry = document.createElement('div');
-  entry.textContent = `[${timestamp}] ${message}`;
-  logDiv.prepend(entry); // New logs at the top
+function downloadResume() {
+  const resumeContent = document.getElementById("resumeDisplay").innerHTML;
+  const printWindow = window.open("", "_blank");
+  printWindow.document.write(`
+    <html>
+      <head>
+        <title>My Resume</title>
+        <style>
+          body { font-family: Arial; margin: 30px; line-height: 1.6; }
+          h3 { color: #333; margin-bottom: 5px; }
+          h4 { color: #3551d8; margin-top: 15px; }
+          hr { margin: 15px 0; border-top: 1px solid #ccc; }
+        </style>
+      </head>
+      <body>${resumeContent}</body>
+    </html>
+  `);
+  printWindow.print();
 }
