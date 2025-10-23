@@ -1,1 +1,66 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <title>Car Speed Control System</title> <link rel="stylesheet" href="style.css"> </head> <body> <div class="container"> <h1>🚗 Car Speed Control System</h1> <div class="car-input"> <input type="text" id="carNumber" placeholder="Enter Car Number (e.g., KA01AB1234)" /> <button id="loadCarBtn">Load Car</button> </div> <div id="controlSection" class="hidden"> <div class="speed-display" id="speedDisplay">Speed: 0 km/h</div> <div class="controls"> <button id="decreaseBtn">- Decrease</button> <button id="increaseBtn">+ Increase</button> </div> </div> <div class="log" id="log"></div> </div> <script src="script.js"></script> </body> </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Resume Builder</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <h1>Online Resume Builder</h1>
+    <p>Create a professional resume in just a few clicks</p>
+  </header>
+
+  <main class="container">
+    <section class="form-section">
+      <h2>Enter Your Details</h2>
+      <form id="resumeForm">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" placeholder="e.g. Aman Sharma" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="e.g. aman@email.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="text" id="phone" placeholder="e.g. +91 9876543210" required>
+        </div>
+
+        <div class="form-group">
+          <label for="education">Education</label>
+          <textarea id="education" rows="3" placeholder="e.g. B.Tech in Computer Science, XYZ University"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="skills">Skills</label>
+          <textarea id="skills" rows="3" placeholder="e.g. HTML, CSS, JavaScript, MySQL"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="experience">Experience</label>
+          <textarea id="experience" rows="3" placeholder="e.g. Web Developer Intern at ABC Company"></textarea>
+        </div>
+
+        <button type="button" onclick="generateResume()">Generate Resume</button>
+      </form>
+    </section>
+
+    <section class="resume-section" id="resumeSection" style="display:none;">
+      <h2>Your Generated Resume</h2>
+      <div id="resumeDisplay" class="resume-box"></div>
+      <button id="downloadBtn" onclick="downloadResume()">Download as PDF</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Online Resume Builder | Designed with ❤️ by Aman</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
